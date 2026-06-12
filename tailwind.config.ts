@@ -8,13 +8,30 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      fontFamily: {
+        display: ["Playfair Display", "serif"],
+        body: ["Jost", "sans-serif"],
+      },
+      colors: {
+        ivory:   "#F5F0E8",
+        noir:    "#0F0F0D",
+        gold:    "#C09A52",
+        stone:   "#7A756E",
+        sand:    "#B5AFA6",
+        charcoal:"#2E2E2A",
+      },
+      letterSpacing: {
+        widest2: "0.2em",
+      },
+      transitionTimingFunction: {
+        luxury: "cubic-bezier(0.76, 0, 0.24, 1)",
+      },
+      transitionDuration: {
+        400: "400ms",
       },
     },
   },
   plugins: [],
 };
+
 export default config;

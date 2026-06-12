@@ -2,32 +2,195 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap');
+
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  /* Core palette */
+  --ivory:        #F5F0E8;
+  --ivory-deep:   #EDE6D8;
+  --noir:         #0F0F0D;
+  --noir-soft:    #1C1C19;
+  --charcoal:     #2E2E2A;
+  --ink:          #3A3A36;
+  --stone:        #7A756E;
+  --sand:         #B5AFA6;
+  --border:       #DDD7CE;
+  --border-dark:  #2E2E2A;
+  --gold:         #C09A52;
+  --gold-light:   #EEE0C4;
+  --white:        #FFFFFF;
+
+  /* Semantic assignments */
+  --bg-light:     var(--ivory);
+  --bg-dark:      var(--noir);
+  --bg-mid:       var(--ivory-deep);
+  --text-primary: var(--noir);
+  --text-secondary: var(--stone);
+  --text-light:   var(--white);
+  --text-gold:    var(--gold);
+  --btn-primary-bg:    var(--noir);
+  --btn-primary-text:  var(--white);
+  --btn-ghost-border:  var(--noir);
+  --btn-ghost-text:    var(--noir);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Smooth scroll with custom easing */
+  scroll-timeline: --page-scroll block;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: "Jost", sans-serif;
+  font-weight: 300;
+  background-color: var(--ivory);
+  color: var(--noir);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Typography base */
+h1, h2, h3, h4 {
+  font-family: "Playfair Display", serif;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* Selection color */
+::selection {
+  background: var(--gold-light);
+  color: var(--noir);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ivory);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--sand);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--stone);
+}
+
+/* Section label style — used across all sections */
+.section-label {
+  font-family: "Jost", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* Animated underline — used on nav links and text links */
+.link-underline {
+  position: relative;
+  text-decoration: none;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* Smooth page transitions */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Button base styles */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--noir);
+  color: var(--white);
+  font-family: "Jost", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 16px 40px;
+  border: 1px solid var(--noir);
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: translateX(-101%);
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.btn-primary:hover::before {
+  transform: translateX(0);
+}
+.btn-primary span {
+  position: relative;
+  z-index: 1;
+}
+.btn-primary:hover {
+  border-color: var(--gold);
+  color: var(--noir);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--noir);
+  font-family: "Jost", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 15px 40px;
+  border: 1px solid var(--noir);
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.btn-ghost:hover {
+  background: var(--noir);
+  color: var(--white);
+}
+
+/* On dark sections — inverted ghost button */
+.btn-ghost-light {
+  border-color: var(--white);
+  color: var(--white);
+}
+.btn-ghost-light:hover {
+  background: var(--white);
+  color: var(--noir);
 }
